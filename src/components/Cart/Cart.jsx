@@ -3,15 +3,17 @@ import React from 'react';
 const Cart = ({cart}) => {
     let total = 0;
     let shipping = 0;
+    let quantity = 0;
     for(const product of cart){
-        total = total + product.price;
-        shipping = shipping + product.shipping;
+        quantity = quantity + product.quantity;
+        total = total + product.price * product.quantity;
+        shipping = shipping + product.shipping  * product.quantity;
     }
     const tax = total  / 100 * 10;
     const grandTotal = total + shipping + parseInt(tax);
     return (
         <div>
-            <h3>This is cart {cart.length}</h3>
+            <h3>This is cart : {quantity}</h3>
             <div>Total Price : {total}</div>
             <div>Total Shopping : {shipping} </div>
             <div>Tax : {tax.toFixed(2)}</div>
